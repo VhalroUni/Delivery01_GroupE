@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.UI;
+using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
@@ -10,9 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumping_pow;
     private bool sprinting = false;
     private bool is_grounded = false;
-    private bool is_on_wall = false;
     private int double_jump = 0;
-    private bool is_sliding = false;
     private Vector2 move_dir = Vector2.zero;
 
     [SerializeField] private Rigidbody2D rigid_body;
@@ -33,9 +32,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(is_grounded);
         LandCollissions();
-        WallSlide();
         //ParticleManager();
 
         if (sprinting && is_grounded) { rigid_body.linearVelocity = new Vector2(move_dir.x * (speed * 2f), rigid_body.linearVelocityY); }
@@ -43,7 +40,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    /* void OnEnable()
+     void OnEnable()
     {
         JumpBooster.OnBoosterTouched += RestartJump;
     }
@@ -52,7 +49,6 @@ public class PlayerController : MonoBehaviour
         JumpBooster.OnBoosterTouched -= RestartJump;
     }
 
-    */
     void OnMove(InputValue value)
     {
         var input_value = value.Get<Vector2>();
@@ -91,9 +87,6 @@ public class PlayerController : MonoBehaviour
     void LandCollissions()
     {
         is_grounded = Physics2D.OverlapCircle(ground_check.position, 0.2f, ground_layer);
-        is_on_wall = Physics2D.OverlapCircle(wall_check.position, 0.2f, wall_layer)
-        || Physics2D.OverlapCircle(wall_check2.position, 0.2f, wall_layer);
-
         if (is_grounded)
         {
             double_jump = 0;
@@ -110,7 +103,6 @@ public class PlayerController : MonoBehaviour
             trail.Stop();
         }
     }
-
 
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -131,26 +123,8 @@ public class PlayerController : MonoBehaviour
     }
 
     */
-
-    private void WallSlide()
-    {
-        if (is_on_wall)
-        {
-            rigid_body.linearVelocityY = -1;
-            is_sliding = true;
-            double_jump = 0;
-        }
-        else
-        {
-            is_sliding = false;
-        }
-    }
-
-
-    /*
     private void RestartJump(JumpBooster booster)
     {
         double_jump = 0;
     }
-    */
 }
