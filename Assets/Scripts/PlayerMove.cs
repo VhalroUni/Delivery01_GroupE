@@ -7,7 +7,7 @@ using UnityEngine.Scripting.APIUpdating;
 public class PlayerController : MonoBehaviour
 {
 
-    private float speed = 8f;
+    public float speed = 8f;
     public float jumping_pow;
     private bool sprinting = false;
     private bool is_grounded = false;
@@ -125,6 +125,6 @@ public class PlayerController : MonoBehaviour
     */
     private void RestartJump(JumpBooster booster)
     {
-        double_jump = 0;
+        double_jump = 1;
     }
 }
