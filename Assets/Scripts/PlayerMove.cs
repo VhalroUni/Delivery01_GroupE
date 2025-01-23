@@ -99,11 +99,11 @@ public class PlayerController : MonoBehaviour
         {
             if (rigid_body.linearVelocityY> 0)
             {
-            rigid_body.gravityScale = 2;
+            rigid_body.gravityScale = 4;
             }
             else if (rigid_body.linearVelocityY < 0)
             {
-            rigid_body.gravityScale = 2.5f;
+            rigid_body.gravityScale = 6;
             }
         }
         else
