@@ -86,15 +86,16 @@ public class PlayerController : MonoBehaviour
     */
     void ModifyGravity() 
     {
+    
         if (!is_grounded)
         {
             if (rigid_body.linearVelocityY> 0)
             {
-                rigid_body.gravityScale = 2;
+            rigid_body.gravityScale = 2;
             }
-            else if (rigid_body.linearVelocityY < 0 && Mathf.Abs(rigid_body.linearVelocityY) < 0.1f)
+            else if (rigid_body.linearVelocityY < 0)
             {
-                rigid_body.gravityScale = 2.5f; 
+            rigid_body.gravityScale = 2.5f;
             }
         }
         else
