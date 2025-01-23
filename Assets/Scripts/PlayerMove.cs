@@ -172,4 +172,24 @@ public class PlayerController : MonoBehaviour
     {
         double_jump = 0;
     }
+
+  //CHEATS
+    bool cheating = false;
+    private void Cheat()
+    {
+        if(Input.GetKeyDown("c"))
+        {
+            cheating = !cheating;
+            Debug.Log("Cheats " + cheating);
+        }
+    }
+    private void Update()
+    {
+        Cheat();
+        if (cheating)
+        {
+            double_jump = 0;
+        }
+    }
+    //CHEATS
 }

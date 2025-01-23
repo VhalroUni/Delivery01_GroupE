@@ -19,7 +19,7 @@ public class ParallaxScrolling : MonoBehaviour
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
 
         //Efecto en ambas direcciones
-        transform.position += new Vector3(deltaMovement.x, deltaMovement.y) * parallaxEffectMultiplier;
+        transform.position -= new Vector3(deltaMovement.x, deltaMovement.y) * parallaxEffectMultiplier;
 
         //Posicion anterior de la cámara
         lastCameraPosition = cameraTransform.position;
