@@ -7,14 +7,17 @@ using UnityEngine.Scripting.APIUpdating;
 public class PlayerController : MonoBehaviour
 {
 
-    public float speed = 8f;
+    public float speed;
     public float jumping_pow;
-    private bool sprinting = false;
-    private bool is_grounded = false;
+    private bool is_sprinting;
+    private bool is_grounded;
+    private bool is_on_wall;
+    private bool is_sliding;
+
     private int double_jump = 0;
     private Vector2 move_dir = Vector2.zero;
-
-    [SerializeField] private Rigidbody2D rigid_body;
+    
+    private Rigidbody2D rigid_body;
     [SerializeField] private Transform ground_check;
     [SerializeField] private Transform wall_check;
     [SerializeField] private Transform wall_check2;
@@ -27,6 +30,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        rigid_body = GetComponent<Rigidbody2D>();
+        is_on_wall = false;
+        is_sliding = false;
+        is_sprinting = false;
+        is_grounded = false;
         //trail.Stop();
         //ground_particles.Stop();
     }
@@ -36,7 +44,7 @@ public class PlayerController : MonoBehaviour
         ModifyGravity();
         //ParticleManager();
 
-        if (sprinting && is_grounded) { rigid_body.linearVelocity = new Vector2(move_dir.x * (speed * 2f), rigid_body.linearVelocityY); }
+        if (is_sprinting && is_grounded) { rigid_body.linearVelocity = new Vector2(move_dir.x * (speed * 2f), rigid_body.linearVelocityY); }
         else { rigid_body.linearVelocity = new Vector2(move_dir.x * speed, rigid_body.linearVelocityY); }
     }
 
@@ -73,13 +81,13 @@ public class PlayerController : MonoBehaviour
 
    /*  void OnSprint()
     {
-        sprinting = true;
+        is_sprinting = true;
         trail.Play();
     }
 
     void OnSprintOff()
     {
-        sprinting = false;
+        is_sprinting = false;
         trail.Stop();
     }
 
@@ -107,6 +115,9 @@ public class PlayerController : MonoBehaviour
     void LandCollissions()
     {
         is_grounded = Physics2D.OverlapCircle(ground_check.position, 0.2f, ground_layer);
+        is_on_wall = Physics2D.OverlapCircle(wall_check.position, 0.2f, wall_layer)
+        || Physics2D.OverlapCircle(wall_check2.position, 0.2f, wall_layer);
+
         if (is_grounded)
         {
             double_jump = 0;
@@ -115,6 +126,20 @@ public class PlayerController : MonoBehaviour
 
 
     /*
+    private void WallSlide()
+    {
+        if (is_on_wall)
+        {
+            rigid_body.linearVelocityY = -1;
+            is_sliding = true;
+            double_jump = 0;
+        }
+        else
+        {
+            is_sliding = false;
+        }
+    }
+
     //Para evitar que el trail siga activado despues de sprintar en el suelo
     void ParticleManager()
     {
