@@ -3450,7 +3450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  jumping_pow: 25
+  jumping_pow: 12
   rigid_body: {fileID: 469029790}
   ground_check: {fileID: 1918508236}
   wall_check: {fileID: 1767466863}
@@ -3476,7 +3476,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 8
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 766c7b7f55e96b940a07866bf04287ec, type: 2}
   m_IncludeLayers:
     serializedVersion: 2

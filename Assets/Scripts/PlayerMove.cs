@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         LandCollissions();
+        ModifyGravity();
         //ParticleManager();
 
         if (sprinting && is_grounded) { rigid_body.linearVelocity = new Vector2(move_dir.x * (speed * 2f), rigid_body.linearVelocityY); }
@@ -83,6 +84,24 @@ public class PlayerController : MonoBehaviour
     }
 
     */
+    void ModifyGravity() 
+    {
+        if (!is_grounded)
+        {
+            if (rigid_body.linearVelocityY> 0)
+            {
+                rigid_body.gravityScale = 2;
+            }
+            else if (rigid_body.linearVelocityY < 0 && Mathf.Abs(rigid_body.linearVelocityY) < 0.1f)
+            {
+                rigid_body.gravityScale = 2.5f; 
+            }
+        }
+        else
+        {
+            rigid_body.gravityScale = 2; 
+        }
+    }
 
     void LandCollissions()
     {
@@ -125,6 +144,6 @@ public class PlayerController : MonoBehaviour
     */
     private void RestartJump(JumpBooster booster)
     {
-        double_jump = 1;
+        double_jump = 0;
     }
 }
