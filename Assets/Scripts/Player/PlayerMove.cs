@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private ParticleSystem trail;
 
 
-
     void Start()
     {
         rigid_body = GetComponent<Rigidbody2D>();
@@ -70,7 +69,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-     void OnEnable()
+    void OnEnable()
     {
         JumpBooster.OnBoosterTouched += RestartJump;
     }
