@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class dmgCollisions : MonoBehaviour
+public class DmgCollisions : MonoBehaviour
 {
     [SerializeField] private int damage;
     public static Action<int> OnDamagingCollision;

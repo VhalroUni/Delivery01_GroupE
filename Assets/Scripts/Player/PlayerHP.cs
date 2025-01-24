@@ -15,11 +15,11 @@ public class PlayerHP : MonoBehaviour
 
     private void OnEnable()
     {
-        dmgCollisions.OnDamagingCollision += TakeDamage;
+        DmgCollisions.OnDamagingCollision += TakeDamage;
     }
     private void OnDisable()
     {
-        dmgCollisions.OnDamagingCollision -= TakeDamage;
+        DmgCollisions.OnDamagingCollision -= TakeDamage;
     }
 
     private void Update()
