@@ -6,21 +6,20 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float jumping_pow;
-    private bool is_sprinting;
-    private bool is_grounded;
-    private bool is_on_wall;
-    private bool is_sliding;
+    private bool isSprinting;
+    private bool isGrounded;
+    private bool isOnWall;
+    private bool isSliding;
 
-    private int double_jump = 0;
-    private Vector2 move_dir = Vector2.zero;
+    private int doubleJump = 0;
+    private Vector2 moveDir = Vector2.zero;
     
     private Rigidbody2D rigid_body;
-    [SerializeField] private Transform ground_check;
-    [SerializeField] private Transform wall_check;
-    [SerializeField] private Transform wall_check2;
-    [SerializeField] private LayerMask ground_layer;
-    [SerializeField] private LayerMask wall_layer;
-    //[SerializeField] private ParticleSystem ground_particles;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform wallCheck;
+    [SerializeField] private Transform wallCheck2;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private ParticleSystem jumpParticles;
     //[SerializeField] private ParticleSystem trail;
 
 
@@ -28,21 +27,22 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigid_body = GetComponent<Rigidbody2D>();
-        is_on_wall = false;
-        is_sliding = false;
-        is_sprinting = false;
-        is_grounded = false;
+        isOnWall = false;
+        isSliding = false;
+        isSprinting = false;
+        isGrounded = false;
         //trail.Stop();
-        //ground_particles.Stop();
+        jumpParticles.Stop();
     }
     void FixedUpdate()
     {
         LandCollissions();
         ModifyGravity();
+        WallSlide();
         //ParticleManager();
 
-        if (is_sprinting && is_grounded) { rigid_body.linearVelocity = new Vector2(move_dir.x * (speed * 2f), rigid_body.linearVelocityY); }
-        else { rigid_body.linearVelocity = new Vector2(move_dir.x * speed, rigid_body.linearVelocityY); }
+        if (isSprinting && isGrounded) { rigid_body.linearVelocity = new Vector2(moveDir.x * (speed * 2f), rigid_body.linearVelocityY); }
+        else { rigid_body.linearVelocity = new Vector2(moveDir.x * speed, rigid_body.linearVelocityY); }
     }
 
 
@@ -58,18 +58,19 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         var input_value = value.Get<Vector2>();
-        move_dir = input_value;
+        moveDir = input_value;
     }
 
     void OnJumpStarted()
     {
-        if (is_grounded == false && double_jump <= 0)
+        if (isGrounded == false && doubleJump <= 0)
         {
             rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow * 0.85f);
-            double_jump += 1;
+            doubleJump += 1;
+            jumpParticles.Play();
         }
 
-        if (is_grounded)
+        if (isGrounded)
         {
             rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow);
         }
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
     void ModifyGravity() 
     {
     
-        if (!is_grounded)
+        if (!isGrounded)
         {
             if (rigid_body.linearVelocityY> 0)
             {
@@ -111,31 +112,33 @@ public class PlayerController : MonoBehaviour
 
     void LandCollissions()
     {
-        is_grounded = Physics2D.OverlapCircle(ground_check.position, 0.2f, ground_layer);
-        is_on_wall = Physics2D.OverlapCircle(wall_check.position, 0.2f, wall_layer)
-        || Physics2D.OverlapCircle(wall_check2.position, 0.2f, wall_layer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isOnWall = Physics2D.OverlapCircle(wallCheck.position, 0.2f, groundLayer)
+        || Physics2D.OverlapCircle(wallCheck2.position, 0.2f, groundLayer);
 
-        if (is_grounded)
+        if (isGrounded)
         {
-            double_jump = 0;
+            doubleJump = 0;
         }
     }
 
 
-    /*
+
     private void WallSlide()
     {
-        if (is_on_wall)
+        if (isOnWall && !isGrounded)
         {
             rigid_body.linearVelocityY = -1;
-            is_sliding = true;
-            double_jump = 0;
+            isSliding = true;
+            doubleJump = 0;
         }
         else
         {
-            is_sliding = false;
+            isSliding = false;
         }
     }
+
+    /*
 
     //Para evitar que el trail siga activado despues de sprintar en el suelo
     void ParticleManager()
@@ -146,28 +149,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (((1 << collision.gameObject.layer) & ground_layer) != 0)
-        {
-            if (ground_particles != null)
-            {
-                Vector2 collisionPoint = collision.contacts[0].point;
-
-                Vector2 offset = new Vector3(0.5f, 0);
-                ground_particles.transform.position = collisionPoint + offset;
-
-                ground_particles.Play();
-            }
-        }
-
-    }
-
     */
     private void RestartJump(JumpBooster booster)
     {
-        double_jump = 0;
+        doubleJump = 0;
     }
 
   //CHEATS
@@ -185,7 +170,7 @@ public class PlayerController : MonoBehaviour
         Cheat();
         if (cheating)
         {
-            double_jump = 0;
+            doubleJump = 0;
         }
     }
     //CHEATS
