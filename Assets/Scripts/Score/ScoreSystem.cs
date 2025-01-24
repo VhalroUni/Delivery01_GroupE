@@ -3,10 +3,22 @@ using UnityEngine;
 
 public class ScoreSystem : MonoBehaviour
 {
-    private int currentScore;
+    public int currentScore { get; private set; }
+    public static ScoreSystem instance;
 
     public static Action<int> OnScoreUpdated;
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
     private void OnEnable()
     {
         Coins.OnCoinCollected += UpdateScore;
@@ -20,5 +32,10 @@ public class ScoreSystem : MonoBehaviour
     {
         currentScore += coin.Value;
         OnScoreUpdated?.Invoke(currentScore);
+    }
+    public void ResetScore()
+    {
+        currentScore = 0;
+        //OnScoreUpdated?.Invoke(currentScore); //! Probably unnecessary
     }
 }

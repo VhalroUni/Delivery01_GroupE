@@ -6,7 +6,7 @@ public class GameSceneManager : MonoBehaviour
     public static GameSceneManager instance { get; private set; }
     private string nextSceneName;
 
-    public void Awake()
+    private void Awake()
     {
         if (instance == null)
         {

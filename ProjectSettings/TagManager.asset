@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - dmg
+  - win
   layers:
   - Default
   - TransparentFX

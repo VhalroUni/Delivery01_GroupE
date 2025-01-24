@@ -1,11 +1,19 @@
+using System;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class PlayerHP : MonoBehaviour
 {
     private PlayerRespawn playerRespawn;
     [SerializeField] private int playerMaxHP;
-    private int playerCurrentHP;
+
+    public delegate void DamageTakenDelegate();
+    public static DamageTakenDelegate OnDamageTaken;
+
+    public delegate void DeathDelegate();
+    public static DeathDelegate OnDeath;
+
+    public int playerCurrentHP { get; private set; }
 
     private void Awake()
     {
@@ -22,24 +30,20 @@ public class PlayerHP : MonoBehaviour
         DmgCollisions.OnDamagingCollision -= TakeDamage;
     }
 
-    private void Update()
+    public void TakeDamage()
+    {
+        playerCurrentHP--;
+        CheckDeathCondition();
+    }
+    public void CheckDeathCondition()
     {
         if (playerCurrentHP <= 0)
         {
-            Die();
+            OnDeath?.Invoke();
+        }
+        else
+        {
+            playerRespawn.Respawn();
         }
     }
-
-
-    public void TakeDamage(int damageTaken)
-    {
-        playerCurrentHP -= damageTaken;
-    }
-    public void Die()
-    {
-        playerRespawn.Respawn();
-        playerCurrentHP = playerMaxHP;
-    }
-
-
 }

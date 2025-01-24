@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private int doubleJump = 0;
     private Vector2 moveDir = Vector2.zero;
-    
+
     private Rigidbody2D rigid_body;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         FaceDirection();
     }
-    
+
     private void UpdateAnimations()
     {
         animator.SetBool("isWalking", moveDir.x != 0 && isGrounded);
@@ -86,50 +86,51 @@ public class PlayerController : MonoBehaviour
 
     void OnJumpStarted()
     {
-        if (isGrounded == false && doubleJump <= 0)
+        if ((!isGrounded) && (doubleJump <= 0)) //Double jumping
         {
             rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow * 0.85f);
+
             doubleJump += 1;
             jumpParticles.Play();
         }
 
-        if (isGrounded)
+        if (isGrounded) //Regular jump
         {
             rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow);
         }
     }
 
 
-   /*  void OnSprint()
-    {
-        is_sprinting = true;
-        trail.Play();
-    }
+    /*  void OnSprint()
+     {
+         is_sprinting = true;
+         trail.Play();
+     }
 
-    void OnSprintOff()
-    {
-        is_sprinting = false;
-        trail.Stop();
-    }
+     void OnSprintOff()
+     {
+         is_sprinting = false;
+         trail.Stop();
+     }
 
-    */
-    void ModifyGravity() 
+     */
+    void ModifyGravity()
     {
-    
+
         if (!isGrounded)
         {
-            if (rigid_body.linearVelocityY> 0)
+            if (rigid_body.linearVelocityY > 0)
             {
-            rigid_body.gravityScale = 4;
+                rigid_body.gravityScale = 4;
             }
             else if (rigid_body.linearVelocityY < 0)
             {
-            rigid_body.gravityScale = 6;
+                rigid_body.gravityScale = 6;
             }
         }
         else
         {
-            rigid_body.gravityScale = 2; 
+            rigid_body.gravityScale = 2;
         }
     }
 
@@ -149,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     private void WallSlide()
     {
-        if (isOnWall && !isGrounded)
+        if (isOnWall && !isGrounded && rigid_body.linearVelocityY < 0)
         {
             rigid_body.linearVelocityY = -1;
             isSliding = true;
@@ -178,11 +179,11 @@ public class PlayerController : MonoBehaviour
         doubleJump = 0;
     }
 
-  //CHEATS
+    //CHEATS
     bool cheating = false;
     private void Cheat()
     {
-        if(Input.GetKeyDown("c"))
+        if (Input.GetKeyDown("c"))
         {
             cheating = !cheating;
             Debug.Log("Cheats " + cheating);

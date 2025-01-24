@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2625389624812791718}
   - component: {fileID: 4074604815437474324}
-  - component: {fileID: 1045311230318095399}
+  - component: {fileID: 8846006332712931716}
   m_Layer: 0
   m_Name: portal_0
   m_TagString: Untagged
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1045311230318095399
+--- !u!114 &8846006332712931716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
