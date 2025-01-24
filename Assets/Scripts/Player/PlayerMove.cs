@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDir = Vector2.zero;
     
     private Rigidbody2D rigid_body;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform wallCheck2;
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigid_body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         isOnWall = false;
         isSliding = false;
         isSprinting = false;
@@ -39,12 +43,32 @@ public class PlayerController : MonoBehaviour
         LandCollissions();
         ModifyGravity();
         WallSlide();
+        UpdateAnimations();
         //ParticleManager();
 
         if (isSprinting && isGrounded) { rigid_body.linearVelocity = new Vector2(moveDir.x * (speed * 2f), rigid_body.linearVelocityY); }
         else { rigid_body.linearVelocity = new Vector2(moveDir.x * speed, rigid_body.linearVelocityY); }
+
+        FaceDirection();
+    }
+    
+    private void UpdateAnimations()
+    {
+        animator.SetBool("isWalking", moveDir.x != 0 && isGrounded);
+        animator.SetBool("isJumping", !isGrounded);
     }
 
+    private void FaceDirection()
+    {
+        if (moveDir.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (moveDir.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
 
      void OnEnable()
     {
