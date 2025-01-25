@@ -30,10 +30,7 @@ public class SceneChanger : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Return))
         {
-            if (SceneManager.GetActiveScene().name != gameplaySceneName)
-            {
-                LoadGame();
-            }
+            LoadGame();
         }
 
 
@@ -45,8 +42,8 @@ public class SceneChanger : MonoBehaviour
     }
     public void LoadGame()
     {
-        ScoreSystem.instance.ResetScore();
-        SceneManager.LoadScene(gameplaySceneName);
+        //ScoreSystem.instance.ResetScore();
+        SceneManager.LoadScene("Gameplay");
         //!OnSceneLoaded?.Invoke(gameplaySceneName);
     }
     public void LoadEnd()
