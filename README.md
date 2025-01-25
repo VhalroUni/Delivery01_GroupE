@@ -4,20 +4,24 @@
 
 ### Description
 
-$(Your Game Description)
+$(Your Game Description) 
 
 ### Features
 
- - $(Game Feature 01)
- - $(Game Feature 02)
- - $(Game Feature 03)
+ - Single jump
+ - Double Jump
+ - Booster for an extra jump
 
 ### Controls
 
 Keyboard:
- - $(Game Control 01)
- - $(Game Control 02)
- - $(Game Control 03)
+
+ - WASD and Arrow Keys for player movement
+ - SPACE for player jump
+ - ENTER to start/restart game
+ - ESCAPE to exit game and close program
+ - DOUBLE SPACE for a double jump
+ - C for infinite jumping with SPACE
 
 ### Screenshots
 
@@ -25,15 +29,17 @@ _TODO: Show your game to the world, animated GIFs recommended!._
 
 ### Developers
 
- - $(Developer 01) - $(Role/Tasks Developed)
- - $(Developer 02) - $(Role/Tasks Developed)
- - $(Developer 03) - $(Role/Tasks Developed)
+ - Joan Forcadell Querol - $(Role/Tasks Developed)
+ - Adrian Valero Fernández - $(Role/Tasks Developed)
+ - Ricardo Fuster Arcos - $(Role/Tasks Developed)
+ - Aitor Alabart Arriaga - $(Role/Tasks Developed)
+ - Enzo Hamblot Marquez - $(Role/Tasks Developed)
+
 
 ### Links
 
  - YouTube Gameplay: $(YouTube Link)
  - itch.io Release: $(itch.io Game Page)
- - Steam Release: $(Steam Game Page)
 
 ### License
 
@@ -41,4 +47,4 @@ This game sources are licensed under MIT license. Check [LICENSE](LICENSE) for f
 
 $(Additional Licenses)
 
-*Copyright (c) $(Year) $(Developers Names)*
+*Copyright (c) 2025 $(Developers Names)*
