@@ -27,16 +27,16 @@ public class Coins : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 0.35) 
+        if (timer >= 0.50) 
         {
              if (dir == 1)
             {
-                transform.position = new Vector3 (transform.position.x, transform.position.y +0.25f, transform.position.z );
+                transform.position = new Vector3 (transform.position.x, transform.position.y +0.05f, transform.position.z );
                 dir = -1;
             }
             else if (dir == -1)
             {
-                transform.position = new Vector3 (transform.position.x, transform.position.y -0.25f, transform.position.z );
+                transform.position = new Vector3 (transform.position.x, transform.position.y -0.05f, transform.position.z );
                 dir = 1; 
             }
             timer = 0;
