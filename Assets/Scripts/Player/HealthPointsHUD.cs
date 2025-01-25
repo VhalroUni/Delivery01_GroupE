@@ -12,20 +12,15 @@ public class HealthPointsHUD : MonoBehaviour
     }
     private void Start()
     {
-        UpdateHPText();
+        //UpdateHPText();
     }
-    private void OnEnable()
-    {
-        PlayerHP.OnDamageTaken += UpdateHPText;
-    }
-    private void OnDisable()
-    {
-        PlayerHP.OnDamageTaken -= UpdateHPText;
-    }
+
     private void UpdateHPText()
     {
         HPText.text = "HP: " + playerHP.playerCurrentHP.ToString("D2");
     }
+    private void Update()
+    {
+        UpdateHPText();
+    }
 }
-
-//! Not Working, Unused 

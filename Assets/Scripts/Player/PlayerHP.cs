@@ -7,9 +7,6 @@ public class PlayerHP : MonoBehaviour
     private PlayerRespawn playerRespawn;
     [SerializeField] private int playerMaxHP;
 
-    public delegate void DamageTakenDelegate();
-    public static DamageTakenDelegate OnDamageTaken;
-
     public delegate void DeathDelegate();
     public static DeathDelegate OnDeath;
 
