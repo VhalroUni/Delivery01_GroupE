@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private ParticleSystem jumpParticles;
     //[SerializeField] private ParticleSystem trail;
+    
+    
+    
+    [SerializeField] private AudioClip jumpSound;
 
 
     void Start()
@@ -92,12 +96,16 @@ public class PlayerController : MonoBehaviour
 
             doubleJump += 1;
             jumpParticles.Play();
+            ControlSound.instance.RunSound(jumpSound);
         }
 
         if (isGrounded) //Regular jump
         {
             rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow);
+            ControlSound.instance.RunSound(jumpSound);
         }
+
+        
     }
 
 
