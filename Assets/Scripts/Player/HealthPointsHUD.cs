@@ -10,11 +10,6 @@ public class HealthPointsHUD : MonoBehaviour
         HPText = GetComponent<Text>();
         playerHP = GameObject.FindWithTag("Player").GetComponent<PlayerHP>();
     }
-    private void Start()
-    {
-        //UpdateHPText();
-    }
-
     private void UpdateHPText()
     {
         HPText.text = "HP: " + playerHP.playerCurrentHP.ToString("D2");
