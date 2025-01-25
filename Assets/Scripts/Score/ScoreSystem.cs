@@ -30,7 +30,7 @@ public class ScoreSystem : MonoBehaviour
 
     private void UpdateScore(Coins coin)
     {
-        currentScore += coin.Value;
+        currentScore += coin.value;
         OnScoreUpdated?.Invoke(currentScore);
     }
     public void ResetScore()

@@ -6,10 +6,9 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float jumping_pow;
-    private bool isSprinting;
+
     private bool isGrounded;
     private bool isOnWall;
-    private bool isSliding;
 
     private int doubleJump = 0;
     private Vector2 moveDir = Vector2.zero;
@@ -35,10 +34,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         isOnWall = false;
-        isSliding = false;
-        isSprinting = false;
         isGrounded = false;
-        //trail.Stop();
         jumpParticles.Stop();
     }
     void FixedUpdate()
@@ -47,10 +43,8 @@ public class PlayerController : MonoBehaviour
         ModifyGravity();
         WallSlide();
         UpdateAnimations();
-        //ParticleManager();
 
-        if (isSprinting && isGrounded) { rigid_body.linearVelocity = new Vector2(moveDir.x * (speed * 2f), rigid_body.linearVelocityY); }
-        else { rigid_body.linearVelocity = new Vector2(moveDir.x * speed, rigid_body.linearVelocityY); }
+        rigid_body.linearVelocity = new Vector2(moveDir.x * speed, rigid_body.linearVelocityY); 
 
         FaceDirection();
     }
@@ -108,23 +102,8 @@ public class PlayerController : MonoBehaviour
         
     }
 
-
-    /*  void OnSprint()
-     {
-         is_sprinting = true;
-         trail.Play();
-     }
-
-     void OnSprintOff()
-     {
-         is_sprinting = false;
-         trail.Stop();
-     }
-
-     */
     void ModifyGravity()
     {
-
         if (!isGrounded)
         {
             if (rigid_body.linearVelocityY > 0)
@@ -161,27 +140,9 @@ public class PlayerController : MonoBehaviour
         if (isOnWall && !isGrounded && rigid_body.linearVelocityY < 0)
         {
             rigid_body.linearVelocityY = -1;
-            isSliding = true;
-            doubleJump = 0;
-        }
-        else
-        {
-            isSliding = false;
         }
     }
 
-    /*
-
-    //Para evitar que el trail siga activado despues de sprintar en el suelo
-    void ParticleManager()
-    {
-        if (!is_grounded)
-        {
-            trail.Stop();
-        }
-    }
-
-    */
     private void RestartJump(JumpBooster booster)
     {
         doubleJump = 0;
