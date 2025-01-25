@@ -10,6 +10,6 @@ public class ScoreEnding : MonoBehaviour
     }
     private void Start()
     {
-        scoreText.text = "FINAL \n SCORE: \n" + ScoreSystem.instance.currentScore;
+        scoreText.text = "FINAL \n SCORE \n" + ScoreSystem.instance.currentScore;
     }
 }
