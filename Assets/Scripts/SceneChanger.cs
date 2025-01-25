@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    /*//!public delegate void SceneLoadedDelegate(string sceneName);
-    public static event SceneLoadedDelegate OnSceneLoaded;*/
-
     public static SceneChanger instance;
 
     private const string titleSceneName = "Title", gameplaySceneName = "Gameplay", endingSceneName = "Ending";
@@ -16,6 +13,7 @@ public class SceneChanger : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
         else
         {
             Destroy(gameObject);
@@ -32,9 +30,6 @@ public class SceneChanger : MonoBehaviour
         {
             LoadGame();
         }
-
-
-
     }
     public void QuitGame()
     {
@@ -42,24 +37,10 @@ public class SceneChanger : MonoBehaviour
     }
     public void LoadGame()
     {
-        //ScoreSystem.instance.ResetScore();
         SceneManager.LoadScene("Gameplay");
-        //!OnSceneLoaded?.Invoke(gameplaySceneName);
     }
     public void LoadEnd()
     {
         SceneManager.LoadScene(endingSceneName);
-        //!OnSceneLoaded?.Invoke(endingSceneName);
     }
-
-    /*//!public string GetTitleName(int sceneNumber)
-    {
-        switch(sceneNumber)
-        {
-            case 1: return titleSceneName;
-            case 2: return gameplaySceneName;
-            case 3: return endingSceneName;
-            default: return titleSceneName;
-        }
-    }*/
 }

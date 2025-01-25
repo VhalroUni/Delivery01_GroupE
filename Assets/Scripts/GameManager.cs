@@ -11,17 +11,21 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
         else if (instance != this)
         {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(gameObject);
     }
+
     private void OnEnable()
     {
         Coins.OnCoinCollected += Win;
         PlayerHP.OnDeath += Lose;
     }
+    
     private void OnDisable()
     {
         Coins.OnCoinCollected -= Win;

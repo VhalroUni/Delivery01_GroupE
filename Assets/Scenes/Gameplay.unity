@@ -5809,9 +5809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad31b939054417645aa2d02a0a85b7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow_speed: 2
-  y_offset: 0
-  x_offset: -1
+  followSpeed: 2
+  yOffset: 0
+  xOffset: -1
   target: {fileID: 469029788}
 --- !u!1001 &548310066
 PrefabInstance:

@@ -7,9 +7,8 @@ public class PlayerRespawn : MonoBehaviour
     private Vector2 respawnLocation;
     private void Awake()
     {
-        //respawnLocation = Vector2.right * (-4);
-        respawnLocation = new Vector2(x, y); //!
-        Respawn(); //!
+        respawnLocation = new Vector2(x, y); 
+        Respawn(); 
     }
     private void Update()
     {

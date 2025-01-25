@@ -7,22 +7,27 @@ public class ScoreSystem : MonoBehaviour
     public static ScoreSystem instance;
 
     public static Action<int> OnScoreUpdated;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+        
         else if (instance != this)
         {
             Destroy(gameObject);
         }
+
         DontDestroyOnLoad(gameObject);
     }
+
     private void OnEnable()
     {
         Coins.OnCoinCollected += UpdateScore;
     }
+
     private void OnDisable()
     {
         Coins.OnCoinCollected -= UpdateScore;
@@ -36,6 +41,5 @@ public class ScoreSystem : MonoBehaviour
     public void ResetScore()
     {
         currentScore = 0;
-        //OnScoreUpdated?.Invoke(currentScore); //! Probably unnecessary
     }
 }

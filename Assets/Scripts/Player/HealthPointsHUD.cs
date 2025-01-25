@@ -3,19 +3,21 @@ using UnityEngine.UI;
 
 public class HealthPointsHUD : MonoBehaviour
 {
-    private Text HPText;
+    private Text hpText;
     private PlayerHP playerHP;
     private void Awake()
     {
-        HPText = GetComponent<Text>();
+        hpText = GetComponent<Text>();
         playerHP = GameObject.FindWithTag("Player").GetComponent<PlayerHP>();
     }
-    private void UpdateHPText()
-    {
-        HPText.text = "HP: " + playerHP.playerCurrentHP.ToString("D2");
-    }
+  
     private void Update()
     {
         UpdateHPText();
+    }
+    
+      private void UpdateHPText()
+    {
+        hpText.text = "HP: " + playerHP.playerCurrentHP.ToString("D2");
     }
 }

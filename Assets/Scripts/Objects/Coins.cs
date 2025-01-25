@@ -14,13 +14,13 @@ public class Coins : MonoBehaviour
 
     private void Awake()
     {
+        transform = GetComponent<Transform>();
         if (value <= 0)
         {
             value = 5;
         }
         timer = 0;
         dir = 1;
-        transform = GetComponent<Transform>();
     }
 
     void Update() 

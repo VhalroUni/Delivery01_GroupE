@@ -6,14 +6,13 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
     public float jumping_pow;
-
     private bool isGrounded;
     private bool isOnWall;
-
     private int doubleJump = 0;
     private Vector2 moveDir = Vector2.zero;
+    bool cheating = false;
 
-    private Rigidbody2D rigid_body;
+    private Rigidbody2D rigidBody;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform groundCheck;
@@ -21,16 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform wallCheck2;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private ParticleSystem jumpParticles;
-    //[SerializeField] private ParticleSystem trail;
-    
-    
-    
     [SerializeField] private AudioClip jumpSound;
 
 
     void Start()
     {
-        rigid_body = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         isOnWall = false;
@@ -44,7 +39,7 @@ public class PlayerController : MonoBehaviour
         WallSlide();
         UpdateAnimations();
 
-        rigid_body.linearVelocity = new Vector2(moveDir.x * speed, rigid_body.linearVelocityY); 
+        rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY); 
 
         FaceDirection();
     }
@@ -86,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if ((!isGrounded) && (doubleJump <= 0)) //Double jumping
         {
-            rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow * 0.85f);
+            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow * 0.85f);
 
             doubleJump += 1;
             jumpParticles.Play();
@@ -95,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded) //Regular jump
         {
-            rigid_body.linearVelocity = new Vector2(rigid_body.linearVelocity.x, jumping_pow);
+            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow);
             ControlSound.instance.RunSound(jumpSound);
         }
 
@@ -106,18 +101,18 @@ public class PlayerController : MonoBehaviour
     {
         if (!isGrounded)
         {
-            if (rigid_body.linearVelocityY > 0)
+            if (rigidBody.linearVelocityY > 0)
             {
-                rigid_body.gravityScale = 4;
+                rigidBody.gravityScale = 4;
             }
-            else if (rigid_body.linearVelocityY < 0)
+            else if (rigidBody.linearVelocityY < 0)
             {
-                rigid_body.gravityScale = 6;
+                rigidBody.gravityScale = 6;
             }
         }
         else
         {
-            rigid_body.gravityScale = 2;
+            rigidBody.gravityScale = 2;
         }
     }
 
@@ -137,9 +132,9 @@ public class PlayerController : MonoBehaviour
 
     private void WallSlide()
     {
-        if (isOnWall && !isGrounded && rigid_body.linearVelocityY < 0)
+        if (isOnWall && !isGrounded && rigidBody.linearVelocityY < 0)
         {
-            rigid_body.linearVelocityY = -1;
+            rigidBody.linearVelocityY = -1;
         }
     }
 
@@ -149,13 +144,11 @@ public class PlayerController : MonoBehaviour
     }
 
     //CHEATS
-    bool cheating = false;
     private void Cheat()
     {
         if (Input.GetKeyDown("c"))
         {
             cheating = !cheating;
-            Debug.Log("Cheats " + cheating);
         }
     }
     private void Update()
