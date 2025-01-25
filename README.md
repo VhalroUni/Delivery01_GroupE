@@ -1,4 +1,4 @@
-## Delivery 01 - $(Game Title)
+## Delivery 01 - Manolo Saltarín
 
 ![$(Game Title)](Screenshots/screenshot01.png "$(Game Title)")
 
