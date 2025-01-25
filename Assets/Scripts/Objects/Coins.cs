@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.UIElements;
@@ -7,9 +8,7 @@ public class Coins : MonoBehaviour
 {
     public int value;
     private Transform transform;
-    private double maxHeight;
-    private double minHeight;
-    private double speed;
+    private float timer;
     private int dir;
     public static Action<Coins> OnCoinCollected;
 
@@ -19,26 +18,29 @@ public class Coins : MonoBehaviour
         {
             value = 5;
         }
-
+        timer = 0;
         dir = 1;
         transform = GetComponent<Transform>();
-        maxHeight = transform.position.y + 3;
-        minHeight = transform.position.y - 3;
     }
 
     void Update() 
     {
-        if (transform.position.y >= maxHeight)
-        {
-            dir = -1;
-        }
-        else if (transform.position.y <= minHeight)
-        {
-            dir = 1; 
-        }
+        timer += Time.deltaTime;
 
-        transform.position = new Vector3 (transform.position.x, transform.position.y + (float)(dir * speed * Time.deltaTime), 
-        transform.position.z );
+        if (timer >= 0.35) 
+        {
+             if (dir == 1)
+            {
+                transform.position = new Vector3 (transform.position.x, transform.position.y +0.25f, transform.position.z );
+                dir = -1;
+            }
+            else if (dir == -1)
+            {
+                transform.position = new Vector3 (transform.position.x, transform.position.y -0.25f, transform.position.z );
+                dir = 1; 
+            }
+            timer = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
