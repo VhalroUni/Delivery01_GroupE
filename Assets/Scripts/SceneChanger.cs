@@ -28,6 +28,7 @@ public class SceneChanger : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Return))
         {
+            ScoreSystem.instance.ResetScore();
             LoadGame();
         }
     }
