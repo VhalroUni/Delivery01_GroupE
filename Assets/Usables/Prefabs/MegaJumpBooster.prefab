@@ -1308,8 +1308,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.31309938, g: 0.9283078, b: 0.97297746, a: 1}
-        key1: {r: 0.628727, g: 0.8867924, b: 0.6006764, a: 0}
+        key0: {r: 0.19455034, g: 0.06284799, b: 0.3660378, a: 1}
+        key1: {r: 0.69803923, g: 0, b: 0.93725497, a: 0}
         key2: {r: 1, g: 0.83375, b: 0, a: 0}
         key3: {r: 1, g: 1, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4846,7 +4846,7 @@ GameObject:
   - component: {fileID: 1076126208626651804}
   - component: {fileID: 6766512464563911993}
   m_Layer: 0
-  m_Name: MegaJump
+  m_Name: MegaJumpBooster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4914,7 +4914,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -5816642994671486895, guid: 20f69323dc9e4e54891ef21c8c6f4557,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.96738195, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4958,7 +4958,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.5808625}
+  m_Offset: {x: 0.00000011920929, y: 0.52791464}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4968,7 +4968,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.96, y: 2.121725}
+  m_Size: {x: 1.0881793, y: 2.2276208}
   m_EdgeRadius: 0
 --- !u!114 &6766512464563911993
 MonoBehaviour:
