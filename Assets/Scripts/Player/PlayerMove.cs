@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isOnWall;
     private int doubleJump = 0;
+    private bool powerJump = false;
     private Vector2 moveDir = Vector2.zero;
     bool cheating = false;
 
@@ -34,9 +35,11 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log(jumping_pow);
         LandCollissions();
         ModifyGravity();
         WallSlide();
+        ChangeJumpPow();
         UpdateAnimations();
 
         rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY); 
@@ -65,10 +68,12 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         JumpBooster.OnBoosterTouched += RestartJump;
+        PowerJump.OnContact += MegaJump;
     }
     void OnDisable()
     {
         JumpBooster.OnBoosterTouched -= RestartJump;
+        PowerJump.OnContact -= MegaJump;
     }
 
     void OnMove(InputValue value)
@@ -93,8 +98,7 @@ public class PlayerController : MonoBehaviour
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow);
             ControlSound.instance.RunSound(jumpSound);
         }
-
-        
+        powerJump = false;
     }
 
     void ModifyGravity()
@@ -128,8 +132,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     private void WallSlide()
     {
         if (isOnWall && !isGrounded && rigidBody.linearVelocityY < 0)
@@ -141,6 +143,23 @@ public class PlayerController : MonoBehaviour
     private void RestartJump(JumpBooster booster)
     {
         doubleJump = 0;
+    }
+
+    private void MegaJump(PowerJump booster) 
+    {
+        powerJump = true;
+    }
+
+    private void ChangeJumpPow() 
+    {
+        if (powerJump) 
+        {
+            jumping_pow = 30;
+        }
+        else 
+        {
+            jumping_pow = 15.5f;
+        }
     }
 
     //CHEATS
