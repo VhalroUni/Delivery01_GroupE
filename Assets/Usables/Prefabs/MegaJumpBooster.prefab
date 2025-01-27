@@ -4845,6 +4845,7 @@ GameObject:
   - component: {fileID: 3608555091935629473}
   - component: {fileID: 1076126208626651804}
   - component: {fileID: 6766512464563911993}
+  - component: {fileID: 8915650837078372326}
   m_Layer: 0
   m_Name: MegaJumpBooster
   m_TagString: Untagged
@@ -4980,5 +4981,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3205d8d84293cb246a6bbbde520810dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8915650837078372326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151730106893891105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8df3e32373afc0428b9b415798fff78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
