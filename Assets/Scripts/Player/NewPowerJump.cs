@@ -8,7 +8,6 @@ public class NewPowerJump : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         OnEnter?.Invoke(this);
-
         Destroy(gameObject);
     }
 }

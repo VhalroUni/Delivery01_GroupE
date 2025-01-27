@@ -42,8 +42,7 @@ public class PlayerController : MonoBehaviour
         ChangeJumpPow();
         UpdateAnimations();
 
-        rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocity.y); // Cambié 'linearVelocity' por 'velocity'
-        //rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY); 
+        rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY); 
 
         FaceDirection();
     }
@@ -71,12 +70,14 @@ public class PlayerController : MonoBehaviour
         JumpBooster.OnBoosterTouched += RestartJump;
         PowerJump.OnEnter += MegaJump;
         PowerJump.OnExit += NoMegaJump;
+        NewPowerJump.OnEnter += PowerUp;
     }
     void OnDisable()
     {
         JumpBooster.OnBoosterTouched -= RestartJump;
         PowerJump.OnEnter -= MegaJump;
         PowerJump.OnExit -= NoMegaJump;
+        NewPowerJump.OnEnter -= PowerUp;
     }
 
     void OnMove(InputValue value)
@@ -101,6 +102,8 @@ public class PlayerController : MonoBehaviour
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow);
             ControlSound.instance.RunSound(jumpSound);
         }
+
+        StopMegaJump();
     }
 
     void ModifyGravity()
@@ -147,11 +150,20 @@ public class PlayerController : MonoBehaviour
         doubleJump = 0;
     }
 
+    private void PowerUp(NewPowerJump powerUp) 
+    {
+        powerJump = true;
+    }
     private void MegaJump(PowerJump booster) 
     {
         powerJump = true;
     }
     private void NoMegaJump(PowerJump booster) 
+    {
+        StopMegaJump();
+    }
+
+    private void StopMegaJump() 
     {
         powerJump = false;
     }
@@ -185,14 +197,4 @@ public class PlayerController : MonoBehaviour
         }
     }
     //CHEATS
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("PowerJump"))  // Comprobar si el objeto tiene el tag 'PowerJump'
-        {
-            powerJump = true;
-            jumping_pow = 30;  // Asignar el valor del PowerJump
-            Destroy(other.gameObject);  // Destruir el power-up recogido
-        }
-    }
 }
