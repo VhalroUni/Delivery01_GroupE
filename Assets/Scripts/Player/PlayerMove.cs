@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(jumping_pow);
         LandCollissions();
         ModifyGravity();
         WallSlide();
@@ -68,12 +67,14 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         JumpBooster.OnBoosterTouched += RestartJump;
-        PowerJump.OnContact += MegaJump;
+        PowerJump.OnEnter += MegaJump;
+        PowerJump.OnExit += NoMegaJump;
     }
     void OnDisable()
     {
         JumpBooster.OnBoosterTouched -= RestartJump;
-        PowerJump.OnContact -= MegaJump;
+        PowerJump.OnEnter -= MegaJump;
+        PowerJump.OnExit -= NoMegaJump;
     }
 
     void OnMove(InputValue value)
@@ -98,7 +99,6 @@ public class PlayerController : MonoBehaviour
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow);
             ControlSound.instance.RunSound(jumpSound);
         }
-        powerJump = false;
     }
 
     void ModifyGravity()
@@ -148,6 +148,10 @@ public class PlayerController : MonoBehaviour
     private void MegaJump(PowerJump booster) 
     {
         powerJump = true;
+    }
+    private void NoMegaJump(PowerJump booster) 
+    {
+        powerJump = false;
     }
 
     private void ChangeJumpPow() 
