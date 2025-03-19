@@ -19,7 +19,10 @@ public class shoo : MonoBehaviour
     void MakeOneBullet(Transform here) 
     {
         var bullet = PoolManager.GetObject();
-        bullet.transform.position = player.transform.position;
-        bullet.SetActive(true);
+        
+        if (bullet != null) 
+        {
+            bullet.transform.position = here.position;
+        }
     }
 }
