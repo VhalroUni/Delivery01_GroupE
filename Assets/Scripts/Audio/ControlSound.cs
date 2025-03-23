@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlSound : MonoBehaviour
 {
+    public AudioSource soundSource;
+
     public static ControlSound instance;
 
-    private AudioSource AudioSource;
-
+    [SerializeField] Slider volumeSlider;
 
     private void Awake()
     {
@@ -13,16 +15,43 @@ public class ControlSound : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            if (!PlayerPrefs.HasKey("soundsVolume"))
+            {
+                PlayerPrefs.SetFloat("soundsVolume", 1);
+                Load();
+            }
+
+            else
+            {
+                Load();
+            }
         }
         else
         {
             Destroy(gameObject);
         }
-        AudioSource = GetComponent<AudioSource>();
+        soundSource = GetComponent<AudioSource>();
     }
 
     public void RunSound(AudioClip sound)
     {
-        AudioSource.PlayOneShot(sound);
+        soundSource.PlayOneShot(sound);
+    }
+
+    public void ChangeVolume()
+    {
+        soundSource.volume = volumeSlider.value;
+        Save();
+    }
+
+    private void Load()
+    {
+        volumeSlider.value = PlayerPrefs.GetFloat("soundsVolume");
+    }
+
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("soundsVolume", volumeSlider.value);
     }
 }

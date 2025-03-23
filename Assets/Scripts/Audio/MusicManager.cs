@@ -26,7 +26,6 @@ public class MusicManager : MonoBehaviour
             {
                 Load(); 
             }
-
         }
         else
         {

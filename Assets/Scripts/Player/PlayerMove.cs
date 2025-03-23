@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
         ActivateDoubleJump.OnEnter -= TriggerDoubleJump;
     }
 
-
     private void FaceDirection()
     {
         if (moveDir.x > 0)

@@ -24,17 +24,20 @@ public class SceneChanger : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
+            Debug.Log("Quitting Game");
             QuitGame();
         }
-        else if (Input.GetKey(KeyCode.Return))
-        {
-            if (ScoreSystem.instance != null)
-            {
-                ScoreSystem.instance.ResetScore();
-            }
-            LoadGame();
-        }
     }
+
+    void OnStart() 
+    {
+        if (ScoreSystem.instance != null)
+        {
+            ScoreSystem.instance.ResetScore();
+        }
+        LoadGame();
+    }
+
     public void QuitGame()
     {
         Application.Quit();
