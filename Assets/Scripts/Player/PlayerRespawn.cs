@@ -10,12 +10,24 @@ public class PlayerRespawn : MonoBehaviour
         respawnLocation = new Vector2(x, y); 
         Respawn(); 
     }
-    private void Update()
+
+    public void OnEnable()
     {
-        respawnLocation = new Vector2(x, y);
+        ControlPoint.OnEnter += AssignRespawnLocaltion;
     }
+
+    public void OnDisable()
+    {
+        ControlPoint.OnEnter += AssignRespawnLocaltion;
+    }
+
     public void Respawn()
     {
         transform.position = respawnLocation;
+    }
+
+    public void AssignRespawnLocaltion(ControlPoint cp) 
+    {
+        respawnLocation = cp.transform.position;    
     }
 }

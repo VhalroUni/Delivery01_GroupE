@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool isOnWall;
     private int doubleJump = 0;
+    private bool canDoubleJump = false;
     private bool powerJump = false;
     private Vector2 moveDir = Vector2.zero;
     bool cheating = false;
@@ -53,6 +54,24 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isJumping", !isGrounded);
     }
 
+    void OnEnable()
+    {
+        JumpBooster.OnBoosterTouched += RestartJump;
+        PowerJump.OnEnter += MegaJump;
+        PowerJump.OnExit += NoMegaJump;
+        NewPowerJump.OnEnter += PowerUp;
+        ActivateDoubleJump.OnEnter += TriggerDoubleJump;
+    }
+    void OnDisable()
+    {
+        JumpBooster.OnBoosterTouched -= RestartJump;
+        PowerJump.OnEnter -= MegaJump;
+        PowerJump.OnExit -= NoMegaJump;
+        NewPowerJump.OnEnter -= PowerUp;
+        ActivateDoubleJump.OnEnter -= TriggerDoubleJump;
+    }
+
+
     private void FaceDirection()
     {
         if (moveDir.x > 0)
@@ -65,21 +84,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        JumpBooster.OnBoosterTouched += RestartJump;
-        PowerJump.OnEnter += MegaJump;
-        PowerJump.OnExit += NoMegaJump;
-        NewPowerJump.OnEnter += PowerUp;
-    }
-    void OnDisable()
-    {
-        JumpBooster.OnBoosterTouched -= RestartJump;
-        PowerJump.OnEnter -= MegaJump;
-        PowerJump.OnExit -= NoMegaJump;
-        NewPowerJump.OnEnter -= PowerUp;
-    }
-
+    
     void OnMove(InputValue value)
     {
         var input_value = value.Get<Vector2>();
@@ -88,14 +93,18 @@ public class PlayerController : MonoBehaviour
 
     void OnJumpStarted()
     {
-        if ((!isGrounded) && (doubleJump <= 0)) //Double jumping
+        if (canDoubleJump) 
         {
-            rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow * 0.85f);
+            if ((!isGrounded) && (doubleJump <= 0)) //Double jumping
+            {
+                rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow * 0.85f);
 
-            doubleJump += 1;
-            jumpParticles.Play();
-            ControlSound.instance.RunSound(jumpSound);
+                doubleJump += 1;
+                jumpParticles.Play();
+                ControlSound.instance.RunSound(jumpSound);
+            }
         }
+        
 
         if (isGrounded) //Regular jump
         {
@@ -123,6 +132,11 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.gravityScale = 2;
         }
+    }
+
+    private void TriggerDoubleJump(ActivateDoubleJump activateDJ)
+    {
+        canDoubleJump = true;  
     }
 
     void LandCollissions()

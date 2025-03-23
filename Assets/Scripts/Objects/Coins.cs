@@ -7,14 +7,14 @@ using UnityEngine.UIElements;
 public class Coins : MonoBehaviour
 {
     public int value;
-    private Transform transform;
+    private Transform _transform;
     private float timer;
     private int dir;
     public static Action<Coins> OnCoinCollected;
 
     private void Awake()
     {
-        transform = GetComponent<Transform>();
+        _transform = GetComponent<Transform>();
         if (value <= 0)
         {
             value = 5;
@@ -31,12 +31,12 @@ public class Coins : MonoBehaviour
         {
              if (dir == 1)
             {
-                transform.position = new Vector3 (transform.position.x, transform.position.y +0.05f, transform.position.z );
+                _transform.position = new Vector3 (_transform.position.x, _transform.position.y +0.05f, _transform.position.z );
                 dir = -1;
             }
             else if (dir == -1)
             {
-                transform.position = new Vector3 (transform.position.x, transform.position.y -0.05f, transform.position.z );
+                _transform.position = new Vector3 (_transform.position.x, _transform.position.y -0.05f, _transform.position.z );
                 dir = 1; 
             }
             timer = 0;
