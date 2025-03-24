@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.UIElements;
@@ -11,6 +12,7 @@ public class Coins : MonoBehaviour
     private float timer;
     private int dir;
     public static Action<Coins> OnCoinCollected;
+    [SerializeField] private GameObject anCoin;
 
     private void Awake()
     {
@@ -27,7 +29,7 @@ public class Coins : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer >= 0.50) 
+        if (timer >= 0.50f) 
         {
              if (dir == 1)
             {
@@ -47,6 +49,7 @@ public class Coins : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            Instantiate(anCoin, _transform.position, Quaternion.identity);
             OnCoinCollected?.Invoke(this);
             gameObject.SetActive(false);
         }

@@ -20,15 +20,6 @@ public class SceneChanger : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Debug.Log("Quitting Game");
-            QuitGame();
-        }
-    }
-
     void OnStart() 
     {
         if (ScoreSystem.instance != null)
@@ -36,6 +27,12 @@ public class SceneChanger : MonoBehaviour
             ScoreSystem.instance.ResetScore();
         }
         LoadGame();
+    }
+
+    void OnExit() 
+    {
+        Debug.Log("Quitting Game");
+        QuitGame();
     }
 
     public void QuitGame()

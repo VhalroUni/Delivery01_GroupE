@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 204210767387331090}
   - component: {fileID: -3268191523975478953}
-  - component: {fileID: 1715963948268953004}
-  - component: {fileID: 4960213051954360780}
-  - component: {fileID: -5549852650267402487}
+  - component: {fileID: 8197390884986695895}
+  - component: {fileID: 6974580502464964930}
   m_Layer: 0
-  m_Name: Coin
+  m_Name: AnCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,53 +90,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1715963948268953004
-BoxCollider2D:
+--- !u!54 &8197390884986695895
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4029481162319025379}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96, y: 0.96}
-    newSize: {x: 0.474, y: 0.496}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.474, y: 0.496}
-  m_EdgeRadius: 0.2
---- !u!114 &4960213051954360780
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6974580502464964930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,21 +126,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4029481162319025379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0556daf54459b89488c70b6879e8bb58, type: 3}
+  m_Script: {fileID: 11500000, guid: 6315ee91733ae9e4499b1fcfaf4829bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
-  anCoin: {fileID: 4029481162319025379, guid: 6d21a2529db771f41a09a8dfe490cfed, type: 3}
---- !u!114 &-5549852650267402487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4029481162319025379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb6e47ffe070ab40bd70f001acada9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collect1: {fileID: 8300000, guid: bc987a4f5d6c07543b609ff38bb50463, type: 3}
+  spriteTrasnform: {fileID: 0}
+  bounceHeight: 0.2
+  bounceSpeed: 2
