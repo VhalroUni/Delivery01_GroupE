@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +27,7 @@ public class ScreenManager : MonoBehaviour
             {
                 toggle.isOn = true;
             }
-            else  
+            else
             {
                 toggle.isOn = false;
             }
@@ -42,7 +41,7 @@ public class ScreenManager : MonoBehaviour
     public void ChangeScreen(bool fullScreen)
     {
         Screen.fullScreen = fullScreen;
-        toggle.isOn = fullScreen;   
+        toggle.isOn = fullScreen;
         Save();
     }
 
@@ -52,9 +51,9 @@ public class ScreenManager : MonoBehaviour
         {
             toggle.isOn = true;
         }
-        else 
+        else
         {
-            toggle.isOn = false;    
+            toggle.isOn = false;
         }
     }
 
@@ -64,10 +63,10 @@ public class ScreenManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Fullscreen", 1);
         }
-        else 
+        else
         {
             PlayerPrefs.SetInt("Fullscreen", 0);
         }
-        
+
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.UIElements;
