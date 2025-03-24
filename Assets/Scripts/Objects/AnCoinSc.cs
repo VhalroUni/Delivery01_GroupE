@@ -6,9 +6,10 @@ public class AnCoinSc : MonoBehaviour
     public Transform spriteTrasnform;
 
     private float timePassed;
-    public float bounceHeight = 2f;
+    public float maxTime;
+    public float bounceHeight = 500f;
     public float bounceSpeed = 3.5f;
-    public float flipSpeed = 5f;
+    public float flipSpeed = 7f;
 
     private Vector3 startPosition;
 
@@ -29,7 +30,7 @@ public class AnCoinSc : MonoBehaviour
         float scale = Mathf.Sin(Time.time * flipSpeed);
         transform.localScale = new Vector3(scale, 1, 1);
 
-        if (timePassed >= 1.5f) 
+        if (timePassed >= maxTime) 
         {
             Destroy(gameObject);    
         } 

@@ -29,14 +29,9 @@ public class SceneChanger : MonoBehaviour
         LoadGame();
     }
 
-    void OnExit() 
-    {
-        Debug.Log("Quitting Game");
-        QuitGame();
-    }
-
     public void QuitGame()
     {
+        Debug.Log("Quitting Game");
         Application.Quit();
     }
     public void LoadGame()
