@@ -43,6 +43,11 @@ public class PlayerHP : MonoBehaviour
         }
         ct.firstTime = false;
     }
+
+    public void ResetHP() 
+    {
+        playerCurrentHP = playerMaxHP;
+    }
     public void CheckDeathCondition()
     {
         if (playerCurrentHP <= 0)

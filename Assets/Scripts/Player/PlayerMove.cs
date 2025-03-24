@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void TriggerDoubleJump(ActivateDoubleJump activateDJ)
+    private void TriggerDoubleJump()
     {
         canDoubleJump = true;  
     }

@@ -34,6 +34,10 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("Quitting Game");
         Application.Quit();
     }
+    public void LoadMenu() 
+    {
+        SceneManager.LoadScene("Menu");
+    }
     public void LoadGame()
     {
         SceneManager.LoadScene("Gameplay");

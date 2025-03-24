@@ -3,13 +3,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
-    [SerializeField] private PlayerHP playerHPManager;
+    [SerializeField] private GameObject player;
+    private PlayerHP playerHPManager;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            playerHPManager = player.GetComponent<PlayerHP>();
         }
 
         else if (instance != this)
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
     private void Lose()
     {
         SceneChanger.instance.LoadEnd();
+        playerHPManager.ResetHP();
     }
 
 }

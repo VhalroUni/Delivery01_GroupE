@@ -8,7 +8,6 @@ public class ControlPoint : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("WeIn");
         OnEnter?.Invoke(this);
     }
 }
