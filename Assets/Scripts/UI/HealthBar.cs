@@ -7,7 +7,6 @@ public class LifeController : MonoBehaviour
 {
     public int health;
     public int maxHealth;
-    private int targetHealth;
     public Slider healthSlider;
     public float timeBetweenHealth = 0;
     public static LifeController Instance;
@@ -15,7 +14,6 @@ public class LifeController : MonoBehaviour
     void Start()
     {
         health = 3;
-        targetHealth = health;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
         Instance = this;

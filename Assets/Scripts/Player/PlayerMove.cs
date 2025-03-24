@@ -103,7 +103,6 @@ public class PlayerController : MonoBehaviour
                 ControlSound.instance.RunSound(jumpSound);
             }
         }
-        
 
         if (isGrounded) //Regular jump
         {
@@ -158,20 +157,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void RestartJump(JumpBooster booster)
+    private void RestartJump()
     {
         doubleJump = 0;
     }
 
-    private void PowerUp(NewPowerJump powerUp) 
+    private void PowerUp() 
     {
         powerJump = true;
     }
-    private void MegaJump(PowerJump booster) 
+
+    private void MegaJump() 
     {
         powerJump = true;
     }
-    private void NoMegaJump(PowerJump booster) 
+
+    private void NoMegaJump() 
     {
         StopMegaJump();
     }

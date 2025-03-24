@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class JumpBooster : MonoBehaviour
 {
-    public static Action<JumpBooster> OnBoosterTouched;
+    public static Action OnBoosterTouched;
 
     public void OnTriggerEnter2D(Collider2D other) 
     {
-        OnBoosterTouched?.Invoke(this);  
+        OnBoosterTouched?.Invoke();  
     }
 }

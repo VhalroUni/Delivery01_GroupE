@@ -13,7 +13,6 @@ public class SceneChanger : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
         else
         {
             Destroy(gameObject);
@@ -31,18 +30,20 @@ public class SceneChanger : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game");
         Application.Quit();
     }
+
     public void LoadMenu() 
     {
         ScoreSystem.instance.ResetScore();
         SceneManager.LoadScene("Title");
     }
+
     public void LoadGame()
     {
         SceneManager.LoadScene("Gameplay");
     }
+
     public void LoadEnd()
     {
         SceneManager.LoadScene(endingSceneName);

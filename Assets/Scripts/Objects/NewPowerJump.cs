@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class NewPowerJump : MonoBehaviour
 {
-    public static Action<NewPowerJump> OnEnter;
+    public static Action OnEnter;
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        OnEnter?.Invoke(this);
+        OnEnter?.Invoke();
         Destroy(gameObject);
     }
 }

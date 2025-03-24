@@ -67,6 +67,5 @@ public class ScreenManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Fullscreen", 0);
         }
-
     }
 }
