@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
     }
     private void Lose()
     {
-        SceneChanger.instance.LoadEnd();
         playerHPManager.ResetHP();
+        SceneChanger.instance.LoadEnd();
     }
 
 }
