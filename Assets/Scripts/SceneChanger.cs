@@ -36,7 +36,7 @@ public class SceneChanger : MonoBehaviour
     }
     public void LoadMenu() 
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Title");
     }
     public void LoadGame()
     {
