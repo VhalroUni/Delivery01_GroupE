@@ -36,6 +36,7 @@ public class SceneChanger : MonoBehaviour
     }
     public void LoadMenu() 
     {
+        ScoreSystem.instance.ResetScore();
         SceneManager.LoadScene("Title");
     }
     public void LoadGame()

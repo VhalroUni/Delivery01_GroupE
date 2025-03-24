@@ -10,6 +10,8 @@ public class PlayerHP : MonoBehaviour
     public delegate void DeathDelegate();
     public static DeathDelegate OnDeath;
 
+    public static Action<int> DamageToBar;
+
     public int playerCurrentHP { get; private set; }
 
     private void Awake()
@@ -33,6 +35,7 @@ public class PlayerHP : MonoBehaviour
     {
         playerCurrentHP--;
         CheckDeathCondition();
+        DamageToBar?.Invoke(1);
     }
 
     public void ResetHP(ControlPoint ct) 

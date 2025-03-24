@@ -18,8 +18,8 @@ public class ScoreHUD : MonoBehaviour
     }
     private void UpdateScoreText(int score)
     {
-        scoreText.text = "SCORE: " + score.ToString("D2");
+        scoreText.text = score.ToString("D2");
     }
-
-
 }
+
+

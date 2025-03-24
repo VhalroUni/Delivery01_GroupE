@@ -25,7 +25,7 @@ public class DynamicButt : MonoBehaviour
             sc.QuitGame();
             break;
 
-            case "TitleButt":
+            case "MenuButt":
             sc.LoadMenu();
             break;
 
