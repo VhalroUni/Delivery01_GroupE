@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class ScreenManager : MonoBehaviour
 {
     private static ScreenManager instance;
     [SerializeField] private Toggle toggle;
+    public TMP_Dropdown dropdown;
+    Resolution[] resolutions;
 
     void Awake()
     {
@@ -31,6 +36,7 @@ public class ScreenManager : MonoBehaviour
             {
                 toggle.isOn = false;
             }
+            CheckResolution();
         }
         else
         {
@@ -67,5 +73,34 @@ public class ScreenManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Fullscreen", 0);
         }
+    }
+
+    public void CheckResolution() 
+    {
+        resolutions = Screen.resolutions;
+        dropdown.ClearOptions();
+        List<string> options = new List<string>();
+        int currentRes = 0;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + " x " + resolutions[i].height;
+            options.Add(option);
+
+            if (Screen.fullScreen && (resolutions[i].width == Screen.currentResolution.width) && 
+                (resolutions[i].height == Screen.currentResolution.height)) 
+            {
+                currentRes = i; 
+            }
+        }
+        dropdown.AddOptions(options);
+        dropdown.value = currentRes;
+        dropdown.RefreshShownValue();
+    }
+
+    public void ChangeRes(int resIndx) 
+    {
+        Resolution resolution = resolutions[resIndx];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }
