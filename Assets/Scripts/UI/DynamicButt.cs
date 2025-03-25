@@ -4,12 +4,21 @@ using UnityEngine.UI;
 public class DynamicButt : MonoBehaviour
 {
     private Button button;
+    private Dropdown dropdown;
 
     private void Start()
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(HandleButtonClick);
+        if (GetComponent<Button>() != null) 
+        {
+            button = GetComponent<Button>();
+            button.onClick.AddListener(HandleButtonClick);
+        }
+        if (GetComponent<Dropdown>() != null) 
+        {
+            dropdown = GetComponent<Dropdown>();
+        }
     }
+
 
     private void HandleButtonClick() 
     {
