@@ -22,11 +22,13 @@ public class LifeController : MonoBehaviour
     private void OnEnable()
     {
         PlayerHP.DamageToBar += TakeDamage;
+        PlayerHP.ResetHPHUD += ResetHp;
     }
 
     private void OnDisable()
     {
         PlayerHP.DamageToBar -= TakeDamage;
+        PlayerHP.ResetHPHUD -= ResetHp;
     }
 
     void Update()
@@ -40,5 +42,10 @@ public class LifeController : MonoBehaviour
         {
             health -= damage;
         }
+    }
+
+    private void ResetHp() 
+    {
+        health = maxHealth;
     }
 }

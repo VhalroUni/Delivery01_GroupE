@@ -96,10 +96,14 @@ public class ScreenManager : MonoBehaviour
         dropdown.AddOptions(options);
         dropdown.value = currentRes;
         dropdown.RefreshShownValue();
+
+        dropdown.value = PlayerPrefs.GetInt("numRes", 0);
     }
 
     public void ChangeRes(int resIndx) 
     {
+        PlayerPrefs.SetInt("numRes", dropdown.value);
+
         Resolution resolution = resolutions[resIndx];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }

@@ -1,22 +1,42 @@
-using System.Threading;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    float time;
-    bool facingRight;
+    private float time;
+    private Rigidbody2D rb;
+    public float speed = 5f;
 
-    void Update()
+    private void OnEnable() // Se ejecuta cada vez que la bala se activa desde la pool
     {
-        if (gameObject.activeSelf) 
-        {
-            time += Time.deltaTime;
+        rb = GetComponent<Rigidbody2D>();
 
-            if (time >= 2f) 
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            Collider2D myCollider = GetComponent<Collider2D>();
+            if (playerCollider != null && myCollider != null)
             {
-                gameObject.SetActive(false);
-                time = 0;
+                Physics2D.IgnoreCollision(myCollider, playerCollider, true);
             }
         }
+
+        // Reiniciar tiempo y aplicar velocidad
+        time = 0;
+        rb.linearVelocity = new Vector2(0, -speed);
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+        if (time >= 2f)
+        {
+            gameObject.SetActive(false); // Volver a la pool
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        rb.linearVelocity = Vector2.zero;
     }
 }
