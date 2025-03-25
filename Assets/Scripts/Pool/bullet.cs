@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
 
     void OnIronBurn() 
     {
-        if (inRange) 
+        if (inRange && rb.linearVelocity == Vector2.zero) 
         {
             Vector2 directionBurned;
             directionBurned = transform.position - player.transform.position;
