@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
         PowerJump.OnExit += NoMegaJump;
         NewPowerJump.OnEnter += PowerUp;
         ActivateDoubleJump.OnEnter += TriggerDoubleJump;
+        Bullet.Burning += IronEx;
     }
     void OnDisable()
     {
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
         PowerJump.OnExit -= NoMegaJump;
         NewPowerJump.OnEnter -= PowerUp;
         ActivateDoubleJump.OnEnter -= TriggerDoubleJump;
+        Bullet.Burning -= IronEx;
     }
 
     private void FaceDirection()
@@ -193,6 +196,13 @@ public class PlayerController : MonoBehaviour
             jumping_pow = 15.5f;
         }
     }
+    private void IronEx(Vector2 direction) 
+    {
+        Debug.Log("Here");
+        direction.Normalize();
+        rigidBody.linearVelocity = -direction * 20;
+    }
+
 
     //CHEATS
     private void Cheat()
