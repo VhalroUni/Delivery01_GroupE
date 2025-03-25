@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     public float speed = 5f;
 
-    private void OnEnable() // Se ejecuta cada vez que la bala se activa desde la pool
+    private void OnEnable() 
     {
         rb = GetComponent<Rigidbody2D>();
 
@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         time += Time.deltaTime;
         if (time >= 2f)
         {
-            gameObject.SetActive(false); // Volver a la pool
+            gameObject.SetActive(false); 
         }
     }
 
