@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class DynamicButt : MonoBehaviour
 {
     private Button button;
+    private Slider audioSlider;
+
+    public static Action<Slider> PassMusicSlider;
 
     private void Start()
     {
@@ -11,6 +15,19 @@ public class DynamicButt : MonoBehaviour
         {
             button = GetComponent<Button>();
             button.onClick.AddListener(HandleButtonClick);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (GetComponent<Slider>() != null)
+        {
+            audioSlider = GetComponent<Slider>();
+            if (audioSlider.gameObject.name == "Volume_Sl")
+            {
+                Debug.Log("here");
+                PassMusicSlider?.Invoke(audioSlider);
+            }
         }
     }
 

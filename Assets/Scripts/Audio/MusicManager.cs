@@ -39,6 +39,15 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        DynamicButt.PassMusicSlider += AddSlider;
+    }
+    private void OnDisable()
+    {
+        DynamicButt.PassMusicSlider -= AddSlider;
+    }
+
     public void ChangeVolume() 
     {
         AudioListener.volume = volumeSlider.value;
@@ -53,5 +62,10 @@ public class MusicManager : MonoBehaviour
     private void Save() 
     {
         PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
+    }
+
+    private void AddSlider(Slider slider) 
+    {
+        volumeSlider = slider;
     }
 }

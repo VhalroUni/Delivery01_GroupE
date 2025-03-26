@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using NUnit.Framework;
 using System.Collections.Generic;
+using System;
+using System.Security.Cryptography;
 
 public class ScreenManager : MonoBehaviour
 {
@@ -13,35 +14,27 @@ public class ScreenManager : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
+        if (!PlayerPrefs.HasKey("Fullscreen"))
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-
-            if (!PlayerPrefs.HasKey("Fullscreen"))
-            {
-                PlayerPrefs.SetInt("Fullscreen", 1);
-                Load();
-            }
-            else
-            {
-                Load();
-            }
-
-            if (Screen.fullScreen)
-            {
-                toggle.isOn = true;
-            }
-            else
-            {
-                toggle.isOn = false;
-            }
-            CheckResolution();
+            PlayerPrefs.SetInt("Fullscreen", 1);
+            Load();
         }
         else
         {
-            Destroy(gameObject);
+            Load();
         }
+
+        if (Screen.fullScreen)
+        {
+            toggle.isOn = true;
+        }
+        else
+        {
+            toggle.isOn = false;
+        }
+        CheckResolution();
+        
+    
     }
 
     public void ChangeScreen(bool fullScreen)
@@ -84,8 +77,8 @@ public class ScreenManager : MonoBehaviour
 
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            string option = resolutions[i].width + " x " + resolutions[i].height + " : " + resolutions[i].refreshRateRatio;
+        options.Add(option);
 
             if (Screen.fullScreen && (resolutions[i].width == Screen.currentResolution.width) && 
                 (resolutions[i].height == Screen.currentResolution.height)) 
@@ -93,6 +86,7 @@ public class ScreenManager : MonoBehaviour
                 currentRes = i; 
             }
         }
+
         dropdown.AddOptions(options);
         dropdown.value = currentRes;
         dropdown.RefreshShownValue();
