@@ -34,6 +34,21 @@ public class ControlSound : MonoBehaviour
         soundSource = GetComponent<AudioSource>();
     }
 
+     private void OnEnable()
+    {
+        DynamicButt.PassAudioSlider += AddSlider;
+    }
+    private void OnDisable()
+    {
+        DynamicButt.PassAudioSlider -= AddSlider;
+    }
+
+    private void AddSlider(Slider slider) 
+    {
+        volumeSlider = slider;
+        slider.onValueChanged.AddListener(delegate { ChangeVolume(); });
+    }
+
     public void RunSound(AudioClip sound)
     {
         soundSource.PlayOneShot(sound);

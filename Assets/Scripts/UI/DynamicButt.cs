@@ -8,6 +8,7 @@ public class DynamicButt : MonoBehaviour
     private Slider audioSlider;
 
     public static Action<Slider> PassMusicSlider;
+    public static Action<Slider> PassAudioSlider; 
 
     private void Start()
     {
@@ -25,12 +26,14 @@ public class DynamicButt : MonoBehaviour
             audioSlider = GetComponent<Slider>();
             if (audioSlider.gameObject.name == "Volume_Sl")
             {
-                Debug.Log("here");
                 PassMusicSlider?.Invoke(audioSlider);
+            }
+            if (audioSlider.gameObject.name == "VolumeS_Sl") 
+            {
+                PassAudioSlider?.Invoke(audioSlider);
             }
         }
     }
-
 
     private void HandleButtonClick() 
     {

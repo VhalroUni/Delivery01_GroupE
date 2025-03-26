@@ -50,6 +50,7 @@ public class MusicManager : MonoBehaviour
 
     public void ChangeVolume() 
     {
+        Debug.Log("ChangingVolume");
         AudioListener.volume = volumeSlider.value;
         Save();
     }
@@ -67,5 +68,6 @@ public class MusicManager : MonoBehaviour
     private void AddSlider(Slider slider) 
     {
         volumeSlider = slider;
+        slider.onValueChanged.AddListener(delegate { ChangeVolume(); });
     }
 }
