@@ -48,9 +48,15 @@ public class MusicManager : MonoBehaviour
         DynamicButt.PassMusicSlider -= AddSlider;
     }
 
+    private void AddSlider(Slider slider)
+    {
+        volumeSlider = slider;
+        slider.value = PlayerPrefs.GetFloat("musicVolume");
+        slider.onValueChanged.AddListener(delegate { ChangeVolume(); });
+    }
+
     public void ChangeVolume() 
     {
-        Debug.Log("ChangingVolume");
         AudioListener.volume = volumeSlider.value;
         Save();
     }
@@ -63,11 +69,5 @@ public class MusicManager : MonoBehaviour
     private void Save() 
     {
         PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
-    }
-
-    private void AddSlider(Slider slider) 
-    {
-        volumeSlider = slider;
-        slider.onValueChanged.AddListener(delegate { ChangeVolume(); });
     }
 }

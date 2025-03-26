@@ -35,9 +35,10 @@ public class ControlSound : MonoBehaviour
     }
 
      private void OnEnable()
-    {
+     {
         DynamicButt.PassAudioSlider += AddSlider;
-    }
+     }
+
     private void OnDisable()
     {
         DynamicButt.PassAudioSlider -= AddSlider;
@@ -46,6 +47,7 @@ public class ControlSound : MonoBehaviour
     private void AddSlider(Slider slider) 
     {
         volumeSlider = slider;
+        slider.value = PlayerPrefs.GetFloat("soundsVolume");
         slider.onValueChanged.AddListener(delegate { ChangeVolume(); });
     }
 
