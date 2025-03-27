@@ -11,7 +11,7 @@ public class PlayerHP : MonoBehaviour
     public static DeathDelegate OnDeath;
 
     public static Action<int> DamageToBar;
-    public static Action<PlayerHP> ResetHPHUD;
+    public static Action ResetHPHUD;
 
     public int playerCurrentHP { get; private set; }
 
@@ -52,7 +52,7 @@ public class PlayerHP : MonoBehaviour
     {
         Debug.Log("here");
         playerCurrentHP = playerMaxHP;
-        ResetHPHUD?.Invoke(this);
+        ResetHPHUD?.Invoke();
     }
     public void CheckDeathCondition()
     {

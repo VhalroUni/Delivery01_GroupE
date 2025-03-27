@@ -44,9 +44,9 @@ public class LifeController : MonoBehaviour
         }
     }
 
-    private void ResetHp(PlayerHP player) 
+    private void ResetHp() 
     {
         health = maxHealth;
-        Debug.Log("adnHere");
+        Debug.Log("andHere");
     }
 }
