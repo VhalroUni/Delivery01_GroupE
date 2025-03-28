@@ -49,11 +49,17 @@ public class Bullet : MonoBehaviour
         }
 
         time += Time.deltaTime;
-        if (time >= 2f)
+        if (time >= 15f)
         {
             time = 0;
-            gameObject.SetActive(false); 
+            gameObject.SetActive(false);
         }
+    }
+
+    void OnInteract()
+    {
+        Debug.Log("Here");
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
