@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour
 
     void OnInteract()
     {
-        Debug.Log(Vector2.Distance(transform.position, player.transform.position));
+
         if (Vector2.Distance(transform.position, player.transform.position) <= 1) 
         {
             gameObject.SetActive(false);

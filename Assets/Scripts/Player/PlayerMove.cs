@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
         ChangeJumpPow();
         UpdateAnimations();
 
-        rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY); 
+        rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY);
 
         FaceDirection();
     }
@@ -198,9 +198,8 @@ public class PlayerController : MonoBehaviour
     }
     private void IronEx(Vector2 direction) 
     {
-        Debug.Log("Here");
         direction.Normalize();
-        rigidBody.linearVelocity = -direction * 20;
+        rigidBody.AddForce(-direction*20, ForceMode2D.Impulse);
     }
 
 
