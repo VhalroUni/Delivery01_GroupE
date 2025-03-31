@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private bool canDoubleJump = false;
     private bool powerJump = false;
     private Vector2 moveDir = Vector2.zero;
+    private bool facingR;
     bool cheating = false;
+
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
         JumpBooster.OnBoosterTouched += RestartJump;
         PowerJump.OnEnter += MegaJump;
         PowerJump.OnExit += NoMegaJump;
-        NewPowerJump.OnEnter += PowerUp;
+        NewPowerJump.OnEnter += MegaJump;
         ActivateDoubleJump.OnEnter += TriggerDoubleJump;
         Bullet.Burning += IronEx;
     }
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
         JumpBooster.OnBoosterTouched -= RestartJump;
         PowerJump.OnEnter -= MegaJump;
         PowerJump.OnExit -= NoMegaJump;
-        NewPowerJump.OnEnter -= PowerUp;
+        NewPowerJump.OnEnter -= MegaJump;
         ActivateDoubleJump.OnEnter -= TriggerDoubleJump;
         Bullet.Burning -= IronEx;
     }
@@ -76,10 +78,12 @@ public class PlayerController : MonoBehaviour
         if (moveDir.x > 0)
         {
             spriteRenderer.flipX = false;
+            facingR = true;
         }
         else if (moveDir.x < 0)
         {
             spriteRenderer.flipX = true;
+            facingR = false;
         }
     }
 
@@ -95,7 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canDoubleJump) 
         {
-            if ((!isGrounded) && (doubleJump <= 0)) //Double jumping
+            if ((!isGrounded) && (doubleJump <= 0)) 
             {
                 rigidBody.linearVelocityY = jumping_pow * 0.85f;
 
@@ -105,13 +109,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isGrounded) //Regular jump
+        if (isGrounded) 
         {
             rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow);
             ControlSound.instance.RunSound(jumpSound);
         }
 
-        StopMegaJump();
+        if (isOnWall && !isGrounded) 
+        { 
+            if (facingR)
+            {
+                Vector2 dir = new Vector2(10, 10);
+                rigidBody.AddForce(dir, ForceMode2D.Force);
+            }
+            else 
+            {
+                Vector2 dir = new Vector2(-10, 10);
+                rigidBody.AddForce(dir, ForceMode2D.Force);
+            }  
+        }
+
+        powerJump = false;
     }
 
     void ModifyGravity()
@@ -163,22 +181,12 @@ public class PlayerController : MonoBehaviour
         doubleJump = 0;
     }
 
-    private void PowerUp() 
-    {
-        powerJump = true;
-    }
-
     private void MegaJump() 
     {
         powerJump = true;
     }
 
     private void NoMegaJump() 
-    {
-        StopMegaJump();
-    }
-
-    private void StopMegaJump() 
     {
         powerJump = false;
     }

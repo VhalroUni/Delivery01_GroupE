@@ -7,6 +7,8 @@ public class ScoreSystem : MonoBehaviour
     private int targetScore = 0;
     private float timeBetweenPoints = 0;
     public static ScoreSystem instance;
+    private float minTimeBetweenPoints = 0.10f; // Tiempo mínimo entre puntos
+    private float maxTimeBetweenPoints = 0.35f;
 
     public static Action<int> OnScoreUpdated;
 
@@ -42,11 +44,14 @@ public class ScoreSystem : MonoBehaviour
 
     private void Update()
     {
-        if (currentScore < targetScore) 
+        if (currentScore < targetScore)
         {
+            float progress = (float)currentScore / targetScore; // Progreso entre 0 y 1
+            float dynamicTimeBetweenPoints = Mathf.Lerp(minTimeBetweenPoints, maxTimeBetweenPoints, 1 - progress);
+
             timeBetweenPoints += Time.deltaTime;
 
-            if (timeBetweenPoints >= 0.20f) 
+            if (timeBetweenPoints >= dynamicTimeBetweenPoints)
             {
                 currentScore += 1;
                 OnScoreUpdated?.Invoke(currentScore);
