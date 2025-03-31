@@ -43,9 +43,6 @@ public class PlayerController : MonoBehaviour
         WallSlide();
         ChangeJumpPow();
         UpdateAnimations();
-
-        rigidBody.linearVelocity = new Vector2(moveDir.x * speed, rigidBody.linearVelocityY);
-
         FaceDirection();
     }
 
@@ -91,6 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         var input_value = value.Get<Vector2>();
         moveDir = input_value;
+        rigidBody.linearVelocityX = moveDir.x * speed;
     }
 
     void OnJumpStarted()
@@ -99,7 +97,7 @@ public class PlayerController : MonoBehaviour
         {
             if ((!isGrounded) && (doubleJump <= 0)) //Double jumping
             {
-                rigidBody.linearVelocity = new Vector2(rigidBody.linearVelocity.x, jumping_pow * 0.85f);
+                rigidBody.linearVelocityY = jumping_pow * 0.85f;
 
                 doubleJump += 1;
                 jumpParticles.Play();
