@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         jumpParticles.Stop();
     }
+
     void FixedUpdate()
     {
         LandCollissions();
